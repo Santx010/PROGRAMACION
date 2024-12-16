@@ -1,0 +1,99 @@
+Abstracción
+from abc import ABC, abstractmethod
+
+class Forma(ABC):
+    @abstractmethod
+    def calcular_area(self):
+        pass
+
+class Circulo(Forma):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def calcular_area(self):
+        return 3.1416 * self.radio ** 2
+
+class Rectangulo(Forma):
+    def __init__(self, ancho, alto):
+        self.ancho = ancho
+        self.alto = alto
+
+    def calcular_area(self):
+        return self.ancho * self.alto
+
+# Uso de las clases
+formas = [Circulo(5), Rectangulo(4, 6)]
+for forma in formas:
+    print(f"El área de la forma es: {forma.calcular_area()}")
+
+Encapsulación
+
+class CuentaBancaria:
+    def __init__(self, titular, saldo):
+        self.__titular = titular  # Atributo privado
+        self.__saldo = saldo      # Atributo privado
+
+    def depositar(self, monto):
+        if monto > 0:
+            self.__saldo += monto
+            print(f"Depósito realizado. Nuevo saldo: {self.__saldo}")
+        else:
+            print("El monto debe ser positivo.")
+
+    def retirar(self, monto):
+        if monto > 0 and monto <= self.__saldo:
+            self.__saldo -= monto
+            print(f"Retiro realizado. Nuevo saldo: {self.__saldo}")
+        else:
+            print("Fondos insuficientes o monto inválido.")
+
+    def obtener_saldo(self):
+        return self.__saldo
+
+# Uso de la clase
+cuenta = CuentaBancaria("Juan Pérez", 1000)
+cuenta.depositar(500)
+cuenta.retirar(300)
+print(f"Saldo final: {cuenta.obtener_saldo()}")
+
+Herencia
+
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def mostrar_informacion(self):
+        print(f"Nombre: {self.nombre}, Edad: {self.edad}")
+
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, grado):
+        super().__init__(nombre, edad)
+        self.grado = grado
+
+    def mostrar_informacion(self):
+        super().mostrar_informacion()
+        print(f"Grado: {self.grado}")
+
+# Uso de las clases
+estudiante = Estudiante("María López", 20, "Segundo Año")
+estudiante.mostrar_informacion()
+
+Polimorfismo
+
+class Animal:
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
+
+# Uso de polimorfismo
+animales = [Perro(), Gato()]
+for animal in animales:
+    print(animal.hacer_sonido())
