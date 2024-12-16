@@ -1,0 +1,34 @@
+clase Clima:
+    def __init__(self):
+        # Lista para almacenar las temperaturas
+        self.temperaturas = []
+    
+    # Método para ingresar las temperaturas diarias
+    def ingresar_temperaturas(self):
+        for i in range(7):
+            temperatura = float(input(f"Ingrese la temperatura del día {i+1}: "))
+            self.temperaturas.append(temperatura)
+    
+    # Método para calcular el promedio semanal
+    def calcular_promedio(self):
+        return sum(self.temperaturas) / len(self.temperaturas)
+
+# Clase principal que maneja la lógica del programa
+class PromedioSemanal:
+    def __init__(self):
+        self.clima = Clima()
+
+    def obtener_promedio(self):
+        self.clima.ingresar_temperaturas()
+        promedio = self.clima.calcular_promedio()
+        return promedio
+
+# Crear una instancia de la clase PromedioSemanal y obtener el promedio
+def main():
+    promedio_semanal = PromedioSemanal()
+    promedio = promedio_semanal.obtener_promedio()
+    print(f"El promedio semanal de temperatura es: {promedio:.2f}°C")
+
+# Llamada a la función principal
+if __name__ == "__main__":
+    main()
