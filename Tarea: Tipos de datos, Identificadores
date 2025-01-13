@@ -1,0 +1,49 @@
+# Este programa calcula el área de diferentes figuras geométricas
+# Los tipos de figuras disponibles son: círculo, cuadrado y rectángulo
+# Se solicita al usuario que ingrese las dimensiones necesarias y elige la figura para calcular su área.
+
+import math
+
+# Función para calcular el área de un círculo
+def calcular_area_circulo(radio: float) -> float:
+    return math.pi * radio ** 2
+
+# Función para calcular el área de un cuadrado
+def calcular_area_cuadrado(lado: float) -> float:
+    return lado ** 2
+
+# Función para calcular el área de un rectángulo
+def calcular_area_rectangulo(base: float, altura: float) -> float:
+    return base * altura
+
+# Función principal del programa
+def main():
+    print("Bienvenido al programa de cálculo de áreas")
+    print("Seleccione una figura para calcular su área:")
+    print("1. Círculo")
+    print("2. Cuadrado")
+    print("3. Rectángulo")
+    
+    # Leer la opción del usuario
+    opcion = int(input("Ingrese el número de la opción (1, 2 o 3): "))
+
+    # Lógica para calcular el área según la opción elegida
+    if opcion == 1:
+        radio = float(input("Ingrese el radio del círculo: "))
+        area = calcular_area_circulo(radio)
+        print(f"El área del círculo es: {area:.2f}")
+    elif opcion == 2:
+        lado = float(input("Ingrese el lado del cuadrado: "))
+        area = calcular_area_cuadrado(lado)
+        print(f"El área del cuadrado es: {area:.2f}")
+    elif opcion == 3:
+        base = float(input("Ingrese la base del rectángulo: "))
+        altura = float(input("Ingrese la altura del rectángulo: "))
+        area = calcular_area_rectangulo(base, altura)
+        print(f"El área del rectángulo es: {area:.2f}")
+    else:
+        print("Opción no válida. Por favor, ingrese una opción entre 1 y 3.")
+
+# Llamada a la función principal
+if __name__ == "__main__":
+    main()
