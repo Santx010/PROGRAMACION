@@ -1,0 +1,90 @@
+# Sistema de gestión de tienda en Python utilizando POO
+
+class Producto:
+    """
+    Clase que representa un producto en la tienda.
+    Atributos:
+    - nombre: Nombre del producto.
+    - precio: Precio del producto.
+    - stock: Cantidad disponible en stock.
+    Métodos:
+    - vender: Reduce el stock al vender un producto.
+    - reponer: Aumenta el stock cuando se repone el producto.
+    """
+
+    def __init__(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def vender(self, cantidad):
+        """Vende una cantidad del producto, reduciendo el stock."""
+        if self.stock >= cantidad:
+            self.stock -= cantidad
+            print(f"Se vendieron {cantidad} unidades de {self.nombre}.")
+        else:
+            print(f"Stock insuficiente para {self.nombre}. Solo quedan {self.stock} unidades.")
+
+    def reponer(self, cantidad):
+        """Repone una cantidad del producto en el stock."""
+        self.stock += cantidad
+        print(f"Se repusieron {cantidad} unidades de {self.nombre}.")
+
+
+class Cliente:
+    """
+    Clase que representa a un cliente de la tienda.
+    Atributos:
+    - nombre: Nombre del cliente.
+    - carrito: Lista de productos que el cliente quiere comprar.
+    Métodos:
+    - agregar_al_carrito: Agrega un producto al carrito del cliente.
+    - ver_carrito: Muestra los productos en el carrito.
+    """
+
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.carrito = []
+
+    def agregar_al_carrito(self, producto, cantidad):
+        """Agrega un producto al carrito."""
+        self.carrito.append((producto, cantidad))
+        print(f"{self.nombre} agregó {cantidad} unidades de {producto.nombre} al carrito.")
+
+    def ver_carrito(self):
+        """Muestra los productos en el carrito."""
+        if not self.carrito:
+            print(f"El carrito de {self.nombre} está vacío.")
+        else:
+            print(f"Carrito de {self.nombre}:")
+            for producto, cantidad in self.carrito:
+                print(f"- {producto.nombre} (Cantidad: {cantidad})")
+
+
+# Ejemplo de uso:
+
+# Crear productos
+producto1 = Producto("Laptop", 1200.00, 10)
+producto2 = Producto("Smartphone", 800.00, 20)
+
+# Crear un cliente
+cliente1 = Cliente("Juan")
+
+# Agregar productos al carrito
+cliente1.agregar_al_carrito(producto1, 2)
+cliente1.agregar_al_carrito(producto2, 1)
+
+# Ver el carrito
+cliente1.ver_carrito()
+
+# Vender productos
+producto1.vender(2)
+producto2.vender(1)
+
+# Reponer productos
+producto1.reponer(5)
+producto2.reponer(10)
+
+# Ver el stock después de las transacciones
+print(f"Stock de {producto1.nombre}: {producto1.stock}")
+print(f"Stock de {producto2.nombre}: {producto2.stock}")
