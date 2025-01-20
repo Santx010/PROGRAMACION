@@ -1,0 +1,66 @@
+# Programa de Aplicación de Conceptos de POO en Python
+
+# Clase base: Persona
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre  # Atributo público
+        self.__edad = edad   # Atributo privado para demostrar encapsulación
+
+    def presentar(self):
+        return f"Hola, mi nombre es {self.nombre} y tengo {self.__edad} años."
+
+    def obtener_edad(self):
+        return self.__edad
+
+    def establecer_edad(self, nueva_edad):
+        if nueva_edad > 0:
+            self.__edad = nueva_edad
+        else:
+            print("Edad no válida.")
+
+# Clase derivada: Estudiante (hereda de Persona)
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    # Método sobrescrito para demostrar polimorfismo
+    def presentar(self):
+        return f"Hola, soy {self.nombre}, tengo {self.obtener_edad()} años y estudio {self.carrera}."
+
+# Clase derivada: Profesor (hereda de Persona)
+class Profesor(Persona):
+    def __init__(self, nombre, edad, materia):
+        super().__init__(nombre, edad)
+        self.materia = materia
+
+    # Método sobrescrito para demostrar polimorfismo
+    def presentar(self):
+        return f"Hola, soy el profesor {self.nombre} y enseño {self.materia}."
+
+# Clase adicional para demostrar polimorfismo a través de argumentos múltiples
+class Calculadora:
+    def operar(self, a, b=None):
+        if b is None:
+            return a * a  # Si solo hay un argumento, retorna el cuadrado
+        return a + b  # Si hay dos argumentos, retorna la suma
+
+# Crear instancias y demostrar funcionalidad
+if __name__ == "__main__":
+    # Crear objetos de las clases
+    persona = Persona("Ana", 30)
+    estudiante = Estudiante("Luis", 20, "Ingeniería")
+    profesor = Profesor("Carlos", 45, "Matemáticas")
+
+    # Usar los métodos de las clases
+    print(persona.presentar())
+    persona.establecer_edad(35)
+    print("Edad actualizada:", persona.obtener_edad())
+
+    print(estudiante.presentar())
+    print(profesor.presentar())
+
+    # Polimorfismo con la clase Calculadora
+    calculadora = Calculadora()
+    print("Operación con un argumento (cuadrado):", calculadora.operar(5))
+    print("Operación con dos argumentos (suma):", calculadora.operar(5, 10))
