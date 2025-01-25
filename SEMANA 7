@@ -1,0 +1,72 @@
+class Persona:
+    """
+    Clase Persona que utiliza un constructor para inicializar atributos y
+    un destructor para realizar una tarea de limpieza al eliminar el objeto.
+    """
+
+    def __init__(self, nombre, edad):
+        """
+        Constructor de la clase Persona.
+        Inicializa los atributos nombre y edad.
+        Este método se llama automáticamente al crear una instancia de la clase.
+        """
+        self.nombre = nombre
+        self.edad = edad
+        print(f"Se ha creado una persona: {self.nombre}, {self.edad} años.")
+
+    def __del__(self):
+        """
+        Destructor de la clase Persona.
+        Este método se llama automáticamente cuando el objeto es eliminado.
+        """
+        print(f"Se ha eliminado la persona: {self.nombre}.")
+
+# Clase adicional para demostrar el cierre de recursos
+class Archivo:
+    """
+    Clase Archivo que maneja la apertura y cierre de un archivo.
+    """
+
+    def __init__(self, nombre_archivo):
+        """
+        Constructor que abre un archivo para escritura.
+        Este método asegura que el archivo esté listo para recibir datos.
+        """
+        self.nombre_archivo = nombre_archivo
+        self.archivo = open(nombre_archivo, 'w')
+        print(f"Archivo '{self.nombre_archivo}' abierto.")
+
+    def escribir(self, contenido):
+        """
+        Escribe contenido en el archivo.
+        """
+        self.archivo.write(contenido)
+
+    def __del__(self):
+        """
+        Destructor que cierra el archivo al eliminar el objeto.
+        Este método asegura que el archivo se cierre correctamente para evitar
+        pérdida de datos o corrupción del archivo.
+        """
+        self.archivo.close()
+        print(f"Archivo '{self.nombre_archivo}' cerrado.")
+
+# Demostración de uso de las clases
+if __name__ == "__main__":
+    # Uso de la clase Persona
+    print("--- Creando objetos de la clase Persona ---")
+    persona1 = Persona("Santiago", 30)
+    persona2 = Persona("Ana", 25)
+
+    # Uso de la clase Archivo
+    print("\n--- Trabajando con la clase Archivo ---")
+    archivo = Archivo("prueba.txt")
+    archivo.escribir("Hola, este es un archivo de prueba.\n")
+
+    # Eliminación manual de objetos para invocar destructores
+    print("\n--- Eliminando objetos manualmente ---")
+    del persona1
+    del persona2
+    del archivo
+
+    print("\n--- Fin del programa ---")
